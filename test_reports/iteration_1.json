@@ -1,0 +1,41 @@
+{
+  "summary": "Comprehensive testing of Turkish AI search engine (indeks.) covering all admin, public search, user, and crawler/Gemini integration endpoints + full frontend e2e. 21/21 backend pytest cases pass; all critical frontend flows (home/search/AI answer/admin/favorites/history/images) render and integrate with backend correctly.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Browser console", "issues": ["2 unrelated 404 resource requests in console (likely favicon/asset) – non-blocking"]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_search_engine.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "server.py is ~510 lines and starts to mix concerns (admin, search, AI orchestration, user). Consider splitting into routers/admin.py, routers/search.py, routers/user.py for maintainability before adding more features.",
+    "`/api/search` always runs the Gemini perplexity_answer when ai=True and there are results – this is a slow + costly path on every search. Recommend short-TTL cache keyed by (query, top-5 page ids) to reduce latency and Emergent LLM key spend.",
+    "Background crawl tasks are fire-and-forget via FastAPI BackgroundTasks; if the worker restarts mid-crawl the site stays 'crawling' forever. Add a stale-status watchdog or a startup reconciliation that resets long-running 'crawling' sites to 'failed'/'queued'.",
+    "`@app.on_event('startup'/'shutdown')` are deprecated in modern FastAPI – migrate to lifespan handlers.",
+    "ClickPayload class in server.py is a no-op leftover (reuses SiteCreate but is never referenced). Dead code – remove.",
+    "Admin endpoints have NO authentication. Anyone with the URL can add/delete/recrawl sites. At minimum protect with an X-Admin-Token header bound to an env var.",
+    "/api/track/click and /api/user/favorites accept raw `dict` instead of Pydantic models – inconsistent with the rest of the API and skips validation/OpenAPI schema.",
+    "crawler.py respects same-domain but ignores robots.txt and has no rate-limit per host beyond 0.15s sleep. For real public crawling, robots.txt + Crawl-Delay handling should be added.",
+    "When `category` filter is applied without text matches, the regex fallback path uses `$and` correctly, but the original text path doesn't include `category` in fallback if Mongo $text returns empty – currently fine but worth a unit test."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_search_engine.py (new)",
+    "/app/test_reports/pytest/pytest_results.xml (new)"
+  ],
+  "success_rate": {"backend": "100% (21/21)", "frontend": "100% of critical flows"},
+  "test_credentials": "No login. Anonymous via X-Anon-Id header; tests use a unique random pytest-<uuid> value.",
+  "seed_data_creation": "Used existing example.com from manual setup; did not delete to keep state for next iteration. Test created transient search/history/favorite rows under pytest anon id, all cleaned up by the tests themselves.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend regression suite is /app/backend/tests/test_search_engine.py – run with `python -m pytest /app/backend/tests/test_search_engine.py -v`. It is idempotent and uses a fresh anon id each run. Existing sites in DB at time of test: example.com (Dokümantasyon, 1 page), yemek.com (Diğer), nefisyemektarifleri.com (Yemek, 200 pages), youtube.com (was re-crawling during admin screenshot). Avoid adding new heavy crawl targets in tests; example.com is light and finishes in <10s. AI answer endpoint takes ~1s extra on every /api/search call.",
+  "rca of the issue": "N/A – no defects found in scope. The two prior bugs mentioned in the request (Mongo $set/$setOnInsert visits conflict, EMERGENT_LLM_KEY read order vs load_dotenv) are confirmed already fixed in current code (server.py line 104 pops `visits`; ai.py reads key lazily via _get_key())."
+}
