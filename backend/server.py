@@ -169,7 +169,7 @@ async def add_site(payload: SiteCreate, background: BackgroundTasks):
     seed = raw if raw.startswith(("http://", "https://")) else "https://" + raw
     site = Site(domain=domain, seed_url=seed)
     await db.sites.insert_one(site.model_dump())
-    background.add_task(_run_crawl_task, site.id, seed, max(5, min(payload.max_pages or 30, 200)))
+    background.add_task(_run_crawl_task, site.id, seed, max(5, min(payload.max_pages or 30, 10000)))
     return site
 
 
