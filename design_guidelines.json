@@ -1,0 +1,127 @@
+{
+  "theme": "light",
+  "archetype": "Swiss & High-Contrast",
+  "mood": "Objective, clear, fast, authoritative",
+  "typography": {
+    "fonts": {
+      "headings": "Cabinet Grotesk, sans-serif",
+      "body": "Manrope, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "scale": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tighter font-black",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-bold",
+      "h3": "text-xl sm:text-2xl tracking-tight font-semibold",
+      "body": "text-base leading-relaxed",
+      "small": "text-sm text-zinc-600",
+      "overline": "text-xs uppercase tracking-[0.2em] font-bold"
+    },
+    "installation": "import fonts via Google Fonts or Fontsource. Ensure 'Cabinet Grotesk' is included (if not on Google Fonts, use 'Satoshi' or fallback to 'Space Grotesk' if needed, but Cabinet/Satoshi preferred)."
+  },
+  "colors": {
+    "background": {
+      "main": "#FAFAFA",
+      "surface": "#FFFFFF",
+      "ai_highlight": "#F0F4FF"
+    },
+    "text": {
+      "primary": "#0A0A0A",
+      "secondary": "#52525B",
+      "muted": "#A1A1AA",
+      "on_accent": "#FFFFFF"
+    },
+    "brand": {
+      "primary": "#002FA7",
+      "primary_hover": "#00227A",
+      "accent_red": "#FF3366",
+      "accent_yellow": "#FFD700"
+    },
+    "border": {
+      "default": "#E4E4E7",
+      "focus": "#002FA7",
+      "ai": "#CBD5E1"
+    }
+  },
+  "layout_and_spacing": {
+    "strategy": "Generous Spacing for Home, Dense Grid for Admin",
+    "public_home": {
+      "container": "max-w-4xl mx-auto px-6 py-20 lg:py-32 flex flex-col items-center justify-center min-h-[80vh]",
+      "search_bar": "w-full max-w-2xl h-16 text-xl rounded-2xl shadow-sm border-2 border-zinc-200 focus-within:border-[#002FA7] transition-all bg-white"
+    },
+    "public_results": {
+      "grid": "grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-7xl mx-auto px-4 sm:px-6 py-8",
+      "main_col": "lg:col-span-8 space-y-8",
+      "side_col": "lg:col-span-4 space-y-6"
+    },
+    "admin_dashboard": {
+      "grid": "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4",
+      "surface_style": "Grid Borders (Technical look) - use border-collapse style layouts with 1px solid borders."
+    }
+  },
+  "components": {
+    "ai_answer_card": {
+      "style": "bg-white border border-[#002FA7]/30 rounded-xl p-6 shadow-sm relative overflow-hidden",
+      "decorator": "Add a thin absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#002FA7] to-[#FF3366]"
+    },
+    "search_result_item": {
+      "style": "group py-4 border-b border-zinc-100 last:border-0",
+      "title": "text-lg font-bold text-[#002FA7] group-hover:underline",
+      "url": "text-sm text-zinc-500 flex items-center gap-2",
+      "snippet": "text-sm text-zinc-700 mt-2 line-clamp-3"
+    },
+    "category_badge": {
+      "style": "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border bg-zinc-50 border-zinc-200 text-zinc-800"
+    },
+    "button": {
+      "primary": "bg-[#002FA7] text-white hover:bg-[#00227A] rounded-lg px-6 py-2.5 font-semibold transition-colors shadow-sm",
+      "secondary": "bg-white border border-zinc-200 text-zinc-800 hover:bg-zinc-50 rounded-lg px-6 py-2.5 font-medium transition-colors"
+    },
+    "input": {
+      "default": "bg-white border border-zinc-200 focus:border-[#002FA7] focus:ring-1 focus:ring-[#002FA7] rounded-lg w-full transition-shadow"
+    }
+  },
+  "icons": {
+    "library": "lucide-react",
+    "usage": "Use stroke-width 1.5 for a clean, sharp look to match the Swiss design aesthetic."
+  },
+  "media": {
+    "images": [
+      {
+        "category": "logo",
+        "description": "Main search engine brand logo",
+        "url": "https://static.prod-images.emergentagent.com/jobs/c05682b2-cbb7-4259-98bb-e85a2ebe1454/images/f7e1fdcc045c81f58f3ae59b84d9262a0465db1235d2e5ef08cf5bcef4b3f712.png"
+      },
+      {
+        "category": "background",
+        "description": "Subtle abstract gradient background for search home page",
+        "url": "https://static.prod-images.emergentagent.com/jobs/c05682b2-cbb7-4259-98bb-e85a2ebe1454/images/7e32b0480aac925465a788bc484112793930377f8818a13e7996bca79693f6be.png"
+      },
+      {
+        "category": "category_placeholder",
+        "description": "Abstract graphic for visual/image search fallback 1",
+        "url": "https://images.unsplash.com/photo-1627037558426-c2d07beda3af?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGNhdGVnb3J5JTIwaWNvbiUyMG1pbmltYWx8ZW58MHx8fHwxNzc5ODUyNzQzfDA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "category": "category_placeholder",
+        "description": "Abstract graphic for visual/image search fallback 2",
+        "url": "https://images.unsplash.com/photo-1622547748225-3fc4abd2cca0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGNhdGVnb3J5JTIwaWNvbiUyMG1pbmltYWx8ZW58MHx8fHwxNzc5ODUyNzQzfDA&ixlib=rb-4.1.0&q=85"
+      }
+    ]
+  },
+  "motion": {
+    "hover": "Subtle -translate-y-[2px] and shadow-md for interactive cards",
+    "page_transition": "Fade in with slight upward motion (framer-motion opacity: 0 -> 1, y: 10 -> 0)",
+    "loading": "Use an indeterminate linear progress bar spanning the top of the viewport or AI answer card in #002FA7, avoid generic spinners."
+  },
+  "testing": {
+    "attributes": "All interactive elements MUST have data-testid. e.g., data-testid='search-input', data-testid='submit-search-button', data-testid='favorite-button'"
+  },
+  "instructions_to_main_agent": [
+    "Use standard Shadcn UI components for the Admin panel (tables, cards, dialogs) but style them with strict, sharp borders (rounded-md instead of rounded-xl).",
+    "For the public UI, custom construct the layouts using Tailwind primitives rather than generic Shadcn cards to maintain the clean 'Perplexity/Google' feel.",
+    "Do not use transparent headers over content; always give the header a solid #FFFFFF or backdrop-blur bg-white/80 background.",
+    "Ensure the hero background image on the home page is applied via a pseudo-element or separate div with low opacity (e.g., opacity-40) so it does not distract from the search bar.",
+    "Do NOT use 'Inter' for headings. Configure Tailwind to use Cabinet Grotesk or Satoshi.",
+    "The AI Answer card must look distinct from standard search results. Use the provided styles."
+  ]
+}
